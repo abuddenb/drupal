@@ -3,12 +3,14 @@
  */
 
 Package.describe({
-    name: "abuddenb:drupal",
+    name: "abuddenberg:drupal",
     summary: "Drupal OAuth2 flow",
     version: "0.0.1"
 });
 
 Package.onUse(function(api) {
+    api.versionsFrom('1.2.1');
+
     api.use('oauth2', ['client', 'server']);
     api.use('oauth', ['client', 'server']);
     api.use('http', ['server']);
