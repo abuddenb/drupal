@@ -8,8 +8,8 @@ OAuth.registerService('drupal', 2, null, function(query) {
 
     var response = getTokenResponse(query);
     
-    var whitelisted = ['uid', 'name', 'mail', 'timezone', 'language', 'picture', 'roles', 'og_user_node'];
-    // var whitelisted = ['uid', 'name', 'mail', 'timezone', 'language', 'picture', 'groups'];
+    // var whitelisted = ['uid', 'name', 'mail', 'timezone', 'language', 'picture', 'roles', 'og_user_node'];
+    var whitelisted = ['uid', 'name', 'mail', 'timezone', 'language', 'picture', 'groups'];
 
     var identity = getUserProfile(response.accessToken);
 
@@ -76,14 +76,14 @@ var getUserProfile = function (accessToken) {
 
     var userProfile;
     try {
-        var userId = HTTP.get(config.drupal_url + "/oauth2/tokens/" + accessToken).data.user_id;
-
-        userProfile = HTTP.get(config.drupal_url + "/" + config.drupal_endpoint + "/user/" + userId, {
-            params: {
-                access_token: accessToken
-            }
-        }).data;
-        // userProfile = HTTP.get(config.drupal_url + "/oauth2/tokens/" + accessToken).data.user;
+        // var userId = HTTP.get(config.drupal_url + "/oauth2/tokens/" + accessToken).data.user_id;
+        //
+        // userProfile = HTTP.get(config.drupal_url + "/" + config.drupal_endpoint + "/user/" + userId, {
+        //     params: {
+        //         access_token: accessToken
+        //     }
+        // }).data;
+        userProfile = HTTP.get(config.drupal_url + "/oauth2/tokens/" + accessToken).data.user;
 
     } catch (err) {
         throw _.extend(new Error("Failed to fetch user profile from Drupal. " + err.message),
