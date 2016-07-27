@@ -53,6 +53,7 @@ var getTokenResponse = function (query) {
                 }
             }).data;
     } catch (err) {
+        console.log(config.drupal_url + "/oauth2/token");
         throw _.extend(new Error("Failed to complete OAuth handshake with Drupal. " + err.message),
             {response: err.response});
     }
